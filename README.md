@@ -7,7 +7,7 @@
 1. Api running, see swagger for API documentation `https://localhost:7070/swagger/index.html`
 
 ### Models
-```c
+```csharp
 public class Properties
     {
         public long Id { get; set; }

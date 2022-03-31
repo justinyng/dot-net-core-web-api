@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JustBuildingsApi.Models;
+using JustBuildingsApi.Interfaces;
 
 namespace JustBuildingsApi.Controllers
 {
@@ -10,10 +11,12 @@ namespace JustBuildingsApi.Controllers
     public class PropertiesController : ControllerBase
     {
         private readonly PropertiesContext _context;
+        private readonly IUpdateProperties updateProperties;
 
-        public PropertiesController(PropertiesContext context)
+        public PropertiesController(PropertiesContext context, IUpdateProperties updateProperties)
         {
             _context = context;
+            this.updateProperties = updateProperties;
         }
 
         [HttpGet]
@@ -65,8 +68,9 @@ namespace JustBuildingsApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Properties>> PostProperties(Properties properties)
+        public async Task<ActionResult<Properties>> PostProperties([FromQuery] Boolean addDemographicData, Properties properties)
         {
+            if (addDemographicData) updateProperties.AddDemographicData(properties);
             _context.Properties.Add(properties);
             await _context.SaveChangesAsync();
 

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace JustBuildingsApi.Models
 {
     public class VariablePoint

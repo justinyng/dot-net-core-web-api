@@ -70,6 +70,8 @@ namespace JustBuildingsApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Properties>> PostProperties([FromQuery] Boolean addDemographicData, Properties properties)
         {
+            //TODO: Add validation for checking latitude and longitude ranges
+            // return with useful message if invalid
             if (addDemographicData) updateProperties.AddDemographicData(properties);
             _context.Properties.Add(properties);
             await _context.SaveChangesAsync();

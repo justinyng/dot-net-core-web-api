@@ -1,0 +1,23 @@
+@startuml
+title Just Buildings App
+
+actor alice
+box "Client (Create-React-App)" #LightPink
+participant UI
+end box
+
+box "Backend (.NET Core MVC)"
+participant controller
+database database
+note over database: In-Memory database
+end box
+
+alice -> UI ++
+UI -> controller ++: http POST request
+controller -> database: save async
+
+controller -> UI --: http response 201
+UI -> alice --
+
+
+@enduml

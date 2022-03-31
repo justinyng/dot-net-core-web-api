@@ -7,5 +7,6 @@ namespace JustBuildingsApi.Models
         public string? StreetAddress { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+        public AdditionalData? AdditionalData { get; set; }
     }
 }

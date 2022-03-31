@@ -9,6 +9,11 @@ namespace JustBuildingsApi.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //TODO: Map AdditionalData, i.e. additional demographic data
+        }
+
         public DbSet<Properties> Properties { get; set; } = null!;
     }
 }

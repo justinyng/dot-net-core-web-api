@@ -1,23 +1,36 @@
 @startuml
-title Just Buildings App
+title Sequence diagram of posting to backend
 
 actor alice
 box "Client (Create-React-App)" #LightPink
-participant UI
+participant propertiesForm
+participant formValidation
 end box
 
 box "Backend (.NET Core MVC)"
 participant controller
+participant task
 database database
-note over database: In-Memory database
+
 end box
 
-alice -> UI ++
-UI -> controller ++: http POST request
-controller -> database: save async
+alice -> propertiesForm ++
+propertiesForm -> formValidation ++
+note over formValidation: validate coord. range
+formValidation -> controller --++: http POST request
+formValidation --
+controller -> task ++
+note over task: retreive v2/demographics API Key
+task -> task 
+note over task: http get v2/demographics api
+task -> task
+task -> controller --
 
-controller -> UI --: http response 201
-UI -> alice --
+controller -> database: save async
+note over database: In-Memory database
+
+controller -> propertiesForm --: http response 201
+propertiesForm -> alice --
 
 
 @enduml

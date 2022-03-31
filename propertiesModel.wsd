@@ -1,0 +1,42 @@
+@startuml
+title Properties model
+
+class Properties {
+        +long Id
+        +string? Name
+        +string? StreetAddress
+        +decimal Latitude
+        +decimal Longitude
+        +AdditionalData? AdditionalData
+}
+
+class AdditionalData
+    {
+        +long Id
+        +string? Type
+        +Attributes? Attributes
+    }
+
+class Attributes
+    {
+        +long Id
+        +MetaData? Income
+        +MetaData? Commute_mode
+    }
+
+class MetaData
+    {
+        +long Id
+        +string? Label
+        +string? Type
+        +ICollection<VariablePoint>? Variables
+    }
+
+class VariablePoint
+    {
+        + long Id
+        +string? Variable
+        +decimal? Value
+        +string? Label
+    }
+@enduml
